@@ -36,6 +36,19 @@ final class NativeStaticallyReferencedJniMethods {
     static native int afInet6();
     static native int sizeofSockaddrIn();
     static native int sizeofSockaddrIn6();
+    static native int sizeofSockaddrStorage();
+    static native int sizeofSizeT();
+    static native int sizeofIovec();
+    static native int iovecOffsetofIovBase();
+    static native int iovecOffsetofIovLen();
+    static native int sizeofMsghdr();
+    static native int msghdrOffsetofMsgName();
+    static native int msghdrOffsetofMsgNamelen();
+    static native int msghdrOffsetofMsgIov();
+    static native int msghdrOffsetofMsgIovlen();
+    static native int msghdrOffsetofMsgControl();
+    static native int msghdrOffsetofMsgControllen();
+    static native int msghdrOffsetofMsgFlags();
 
     static native int etime();
     static native int ecanceled();
@@ -52,6 +65,8 @@ final class NativeStaticallyReferencedJniMethods {
     static native int ioringOpWrite();
     static native int ioringOpConnect();
     static native int ioringOpClose();
+    static native int ioringOpSendmsg();
+    static native int ioringOpRecvmsg();
     static native int ioringEnterGetevents();
     static native int iosqeAsync();
 }

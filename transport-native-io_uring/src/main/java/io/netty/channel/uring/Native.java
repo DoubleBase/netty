@@ -66,8 +66,25 @@ final class Native {
     static final int SOCK_CLOEXEC = NativeStaticallyReferencedJniMethods.sockCloexec();
     static final short AF_INET = (short) NativeStaticallyReferencedJniMethods.afInet();
     static final short AF_INET6 = (short) NativeStaticallyReferencedJniMethods.afInet6();
+    static final int SIZEOF_SOCKADDR_STORAGE = NativeStaticallyReferencedJniMethods.sizeofSockaddrStorage();
     static final int SIZEOF_SOCKADDR_IN = NativeStaticallyReferencedJniMethods.sizeofSockaddrIn();
     static final int SIZEOF_SOCKADDR_IN6 = NativeStaticallyReferencedJniMethods.sizeofSockaddrIn6();
+    static final int SIZEOF_SIZE_T = NativeStaticallyReferencedJniMethods.sizeofSizeT();
+
+    static int SIZEOF_IOVEC = NativeStaticallyReferencedJniMethods.sizeofIovec();
+    static int IOVEC_OFFSETOF_IOV_BASE = NativeStaticallyReferencedJniMethods.iovecOffsetofIovBase();
+    static int IOVEC_OFFSETOF_IOV_LEN = NativeStaticallyReferencedJniMethods.iovecOffsetofIovLen();
+
+    static final int SIZEOF_MSGHDR = NativeStaticallyReferencedJniMethods.sizeofMsghdr();
+    static final int MSGHDR_OFFSETOF_MSG_NAME = NativeStaticallyReferencedJniMethods.msghdrOffsetofMsgName();
+    static final int MSGHDR_OFFSETOF_MSG_NAMELEN = NativeStaticallyReferencedJniMethods.msghdrOffsetofMsgNamelen();
+    static final int MSGHDR_OFFSETOF_MSG_IOV = NativeStaticallyReferencedJniMethods.msghdrOffsetofMsgIov();
+    static final int MSGHDR_OFFSETOF_MSG_IOVLEN = NativeStaticallyReferencedJniMethods.msghdrOffsetofMsgIovlen();
+    static final int MSGHDR_OFFSETOF_MSG_CONTROL = NativeStaticallyReferencedJniMethods.msghdrOffsetofMsgControl();
+    static final int MSGHDR_OFFSETOF_MSG_CONTROLLEN =
+            NativeStaticallyReferencedJniMethods.msghdrOffsetofMsgControllen();
+    static final int MSGHDR_OFFSETOF_MSG_FLAGS = NativeStaticallyReferencedJniMethods.msghdrOffsetofMsgFlags();
+
     static final int POLLIN = NativeStaticallyReferencedJniMethods.pollin();
     static final int POLLOUT = NativeStaticallyReferencedJniMethods.pollout();
     static final int POLLRDHUP = NativeStaticallyReferencedJniMethods.pollrdhup();
@@ -82,6 +99,8 @@ final class Native {
     static final int IORING_OP_CONNECT = NativeStaticallyReferencedJniMethods.ioringOpConnect();
     static final int IORING_OP_CLOSE = NativeStaticallyReferencedJniMethods.ioringOpClose();
     static final int IORING_OP_WRITEV = NativeStaticallyReferencedJniMethods.ioringOpWritev();
+    static final int IORING_OP_SENDMSG = NativeStaticallyReferencedJniMethods.ioringOpSendmsg();
+    static final int IORING_OP_RECVMSG = NativeStaticallyReferencedJniMethods.ioringOpRecvmsg();
     static final int IORING_ENTER_GETEVENTS = NativeStaticallyReferencedJniMethods.ioringEnterGetevents();
     static final int IOSQE_ASYNC = NativeStaticallyReferencedJniMethods.iosqeAsync();
 
