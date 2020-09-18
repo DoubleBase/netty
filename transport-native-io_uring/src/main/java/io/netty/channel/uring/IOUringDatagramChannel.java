@@ -454,10 +454,9 @@ public final class IOUringDatagramChannel extends AbstractIOUringChannel impleme
 
             recvMsg = !isConnected();
             long bufferAddress = byteBuf.memoryAddress();
+            allocHandle.attemptedBytesRead(byteBuf.writableBytes());
 
             if (!recvMsg) {
-                allocHandle.attemptedBytesRead(byteBuf.writableBytes());
-
                 submissionQueue.addRead(socket.intValue(), bufferAddress,
                         byteBuf.writerIndex(), byteBuf.capacity());
             } else {
@@ -466,7 +465,7 @@ public final class IOUringDatagramChannel extends AbstractIOUringChannel impleme
                 long sockaddrAddress = recvmsgBufferAddr + Native.SIZEOF_MSGHDR;
                 long iovecAddress = sockaddrAddress + addrLen;
 
-                Iov.write(iovecAddress, bufferAddress + byteBuf.writerIndex(), readBuffer.writableBytes());
+                Iov.write(iovecAddress, bufferAddress + byteBuf.writerIndex(), byteBuf.writableBytes());
                 MsgHdr.write(recvmsgBufferAddr, sockaddrAddress, addrLen, iovecAddress, 1);
                 submissionQueue.addRecvmsg(socket.intValue(), recvmsgBufferAddr);
             }
