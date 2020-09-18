@@ -33,8 +33,6 @@ final class MsgHdr {
     private MsgHdr() { }
 
     static void write(long memoryAddress, long address, int addressSize,  long iovAddress, int iovLength) {
-        // memset
-        PlatformDependent.setMemory(memoryAddress, Native.SIZEOF_MSGHDR, (byte) 0);
         PlatformDependent.putLong(memoryAddress + Native.MSGHDR_OFFSETOF_MSG_NAME, address);
         PlatformDependent.putInt(memoryAddress + Native.MSGHDR_OFFSETOF_MSG_NAMELEN, addressSize);
 
@@ -47,6 +45,6 @@ final class MsgHdr {
             PlatformDependent.putLong(memoryAddress + Native.MSGHDR_OFFSETOF_MSG_IOVLEN, iovLength);
         }
 
-        // No msg_control and flags (we did memset before so no need to write these explicit)
+        // No msg_control and flags (we assume the memory was memset before)
     }
 }

@@ -31,6 +31,7 @@ import io.netty.channel.unix.Errors;
 import io.netty.channel.unix.Errors.NativeIoException;
 import io.netty.channel.unix.Socket;
 import io.netty.util.internal.ObjectUtil;
+import io.netty.util.internal.PlatformDependent;
 import io.netty.util.internal.StringUtil;
 
 import java.io.IOException;
@@ -341,9 +342,12 @@ public final class IOUringDatagramChannel extends AbstractIOUringChannel impleme
             long address = this.sendmsgBufferAddr;
             if (address == -1) {
                 assert sendmsgBuffer == null;
-                sendmsgBuffer = Buffer.allocateDirectWithNativeOrder(
-                        Native.SIZEOF_MSGHDR + Native.SIZEOF_SOCKADDR_STORAGE + Native.SIZEOF_IOVEC);
+                int length = Native.SIZEOF_MSGHDR + Native.SIZEOF_SOCKADDR_STORAGE + Native.SIZEOF_IOVEC;
+                sendmsgBuffer = Buffer.allocateDirectWithNativeOrder(length);
                 sendmsgBufferAddr = address = Buffer.memoryAddress(sendmsgBuffer);
+
+                // memset once
+                PlatformDependent.setMemory(address, length, (byte) 0);
             }
             return address;
         }
@@ -352,9 +356,12 @@ public final class IOUringDatagramChannel extends AbstractIOUringChannel impleme
             long address = this.recvmsgBufferAddr;
             if (address == -1) {
                 assert recvmsgBuffer == null;
-                recvmsgBuffer = Buffer.allocateDirectWithNativeOrder(
-                        Native.SIZEOF_MSGHDR + Native.SIZEOF_SOCKADDR_STORAGE + Native.SIZEOF_IOVEC);
+                int length = Native.SIZEOF_MSGHDR + Native.SIZEOF_SOCKADDR_STORAGE + Native.SIZEOF_IOVEC;
+                recvmsgBuffer = Buffer.allocateDirectWithNativeOrder(length);
                 recvmsgBufferAddr = address = Buffer.memoryAddress(recvmsgBuffer);
+
+                // memset once
+                PlatformDependent.setMemory(address, length, (byte) 0);
             }
             return address;
         }
